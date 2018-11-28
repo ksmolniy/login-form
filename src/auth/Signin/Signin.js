@@ -64,6 +64,13 @@ const schema = Yup.object().shape({
     .email('Введите правильную почту'),
 });
 
+const initialValues = {
+  name: '',
+  password: '',
+  repitedPassword: '',
+  email: '',
+}
+
 const formSubmited = (values) => {
   console.log(values);
 }
@@ -77,6 +84,7 @@ const Signin = () => (
       validationSchema={schema}
       validateOnChange={false}
       onSubmit={formSubmited}
+      initialValues={initialValues}
     />
   </AuthModal>
 );

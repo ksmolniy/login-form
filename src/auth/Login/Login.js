@@ -46,6 +46,11 @@ const formSubmited = (values) => {
   console.log(values);
 }
 
+const initialValues = {
+  name: '',
+  password: '',
+}
+
 const FocusedForm = FocusOnMount(LoginForm);
 
 const Login = () => (
@@ -55,6 +60,7 @@ const Login = () => (
       validationSchema={schema}
       validateOnChange={false}
       onSubmit={formSubmited}
+      initialValues={initialValues}
     />
   </AuthModal>
 );
