@@ -1,0 +1,25 @@
+.auth-modal {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+
+  &__container {
+    border-radius: 1rem;
+  }
+
+  &__header, &__body {
+    padding: 1rem;
+  }
+
+  &__header {
+    background: #7D4CDB;
+    border-top-right-radius: 1rem;
+    color: #fff;
+    text-align: center;
+    font-size: 1.4rem;
+    border-top-left-radius: 1rem;
+  }
+}
