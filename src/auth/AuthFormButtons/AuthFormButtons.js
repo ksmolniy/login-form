@@ -2,7 +2,7 @@ import React from 'react'
 import './AuthFormButtons.scss';
 
 const AuthFormButtons = ({ children }) => (
-  <div className="auth-form__buttons">
+  <div className="auth-form-buttons">
     { children }
   </div>
 );

@@ -1,8 +1,10 @@
-.auth-form{
-  &__buttons {
+.auth-form-buttons {
     padding-top: .5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
+
+  &__button {
+    width: 100%;
   }
 }
