@@ -6,11 +6,11 @@ type Methods = 'POST' | 'GET';
 const apiUrl: string = ((process && process.env && process.env.REACT_APP_API_BASE_URL) || '') + ((process && process.env && process.env.REACT_APP_API_VERSION) || '');
 
 export default function (url: string, method?: Methods = 'GET', body?: any): Promise<any> {
-  const tokken = getCookie('token');
+  const token = getCookie('token');
   const headers = new Headers();
 
-  if (tokken) {
-    headers.append('x-access-token', tokken);
+  if (token) {
+    headers.append('x-access-token', token);
   }
 
   const options: RequestOptions = { method, headers };

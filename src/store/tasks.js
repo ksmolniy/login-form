@@ -14,17 +14,18 @@ export type Task = {
   +createdAt: string,
   +updatedAt: string,
   +liked: number,
-}
+};
 
 export type Tasks = {
   +count: number,
   +rows: Task[],
-}
+};
 
 const initialState: Tasks = {
   count: 0,
   rows: [],
-}
+};
+
 export default createReducer<Tasks>({
   
-}, initialState)
+}, initialState);

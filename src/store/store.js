@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import userReducer, { type User } from './user';
 import balanceReducer, { type Balance } from './balance';
 import tasksReducer, { type Tasks } from './tasks';
+import rootSaga from './sagas';
 
 type State = {
   +user: User,
@@ -12,7 +13,7 @@ type State = {
   +tasks: Tasks,
 }
 
-type Action = {
+export type Action = {
   type: string,
   payload: any,
 };
@@ -25,16 +26,18 @@ const reducers = {
   tasks: tasksReducer,
 };
 
-type Recuders = typeof reducers;
+type Reducers = typeof reducers;
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore<State, Action, Dispatcher>(
-  combineReducers<Recuders, Action>(reducers),
+  combineReducers<Reducers, Action>(reducers),
   composeWithDevTools(
     applyMiddleware(sagaMiddleware),
   ),
 );
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
 
