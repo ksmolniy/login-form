@@ -2586,6 +2586,10 @@ declare module 'grommet/themes/__tests__/theme-test' {
   declare module.exports: any;
 }
 
+declare module 'grommet/themes' {
+  declare module.exports: any;
+}
+
 declare module 'grommet/themes/base' {
   declare module.exports: any;
 }

@@ -1,5 +1,7 @@
 // @flow
-import { createStore, combineReducers, type Dispatch } from 'redux';
+import { createStore, combineReducers, applyMiddleware, type Dispatch } from 'redux';
+import createSagaMiddleware  from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import userReducer, { type User } from './user';
 import balanceReducer, { type Balance } from './balance';
 import tasksReducer, { type Tasks } from './tasks';
@@ -25,7 +27,14 @@ const reducers = {
 
 type Recuders = typeof reducers;
 
-const store = createStore<State, Action, Dispatcher>(combineReducers<Recuders, Action>(reducers));
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore<State, Action, Dispatcher>(
+  combineReducers<Recuders, Action>(reducers),
+  composeWithDevTools(
+    applyMiddleware(sagaMiddleware),
+  ),
+);
 
 export default store;
 

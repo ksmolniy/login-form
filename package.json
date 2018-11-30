@@ -53,6 +53,7 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-act": "^1.7.4",
+    "redux-devtools-extension": "^2.13.7",
     "redux-saga": "^0.16.2",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
