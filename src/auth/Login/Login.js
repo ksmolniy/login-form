@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { TextInput, Button, Anchor } from 'grommet';
 import * as Yup from 'yup';
@@ -9,7 +10,7 @@ import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
 import * as routes from '../../constants/routes';
 import FocusOnMount from '../../utils/FocusOnMount';
 
-const LoginForm = ({ handleChange, handleSubmit, handleBlur, touched, errors, values: { name, password }, focusElRef }) => (
+const LoginForm = ({handleChange, handleSubmit, handleBlur, touched, errors, values: { name, password }, focusElRef }) => (
   <form onSubmit={handleSubmit}>
     <AuthFormLabel label="Логин:" error={touched.name && errors.name} reqired >
       <TextInput

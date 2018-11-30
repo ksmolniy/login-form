@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { TextInput, Button, Anchor } from 'grommet';
 import { Link } from 'react-router-dom';

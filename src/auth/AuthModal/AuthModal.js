@@ -1,8 +1,14 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { Box } from 'grommet';
 import './AuthModal.scss';
 
-const AuthModal = ({ title, children }) => (
+type props = {|
+  title: string,
+  children: React.Node,
+|}
+
+const AuthModal = ({ title, children }: props) => (
   <div className="auth-modal">
     <Box elevation="medium" className="auth-modal__container">
       <header className="auth-modal__header">
