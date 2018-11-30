@@ -15,7 +15,7 @@ const AuthFormLabel = ({ label, reqired, children, error } : props) => (
     { label }
     { reqired && <span className="auth-form-label--required">{' *'}</span> }
     { children }
-    { error && <span className="auth-form-label__error">{ error }</span> }
+    <span className="auth-form-label__error">{ error }</span>
   </label>
 )
 
