@@ -7,7 +7,7 @@ import balanceReducer, { type Balance } from './balance';
 import tasksReducer, { type Tasks } from './tasks';
 import rootSaga from './sagas';
 
-type State = {
+export type State = {
   +user: User,
   +balance: Balance,
   +tasks: Tasks,

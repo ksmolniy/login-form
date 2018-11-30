@@ -15,6 +15,8 @@ export const setCookie = (key: string, value: string, hours?: number = 5) => {
   document.cookie = `${key}=${value};${expires};path=/`;
 }
 
+export const getToken = () => getCookie('token');
+
 export const deleteCookie = (key: string) => {
   document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
