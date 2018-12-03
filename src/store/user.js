@@ -1,8 +1,9 @@
 import { createAction, createReducer } from 'redux-act';
+import { getCookie } from '../utils/cookie';
 
 
 const initialState = {
-  isLogIn: false,
+  isLogIn: !!getCookie('token'),
   loading: false,
   isFailed: false,
 };
@@ -13,7 +14,7 @@ export const registrationFailed = createAction('registration failed');
 export const registrationSuccess = createAction('registration success');
 
 export default createReducer({
-  [registrationStart.toString()]: (state) => ({ ...initialState, loading: true }),
-  [registrationFailed.toString()]: (state) => ({ ...state, loading: false, isLogIn: true, }),
-  [registrationSuccess.toString()]: (state) => ({ ...state, loading: false, isFailed: true, }),
+  [registrationStart]: (state) => ({ ...initialState, loading: true }),
+  [registrationFailed]: (state) => ({ ...state, loading: false, isLogIn: true, }),
+  [registrationSuccess]: (state) => ({ ...state, loading: false, isFailed: true, }),
 }, initialState)

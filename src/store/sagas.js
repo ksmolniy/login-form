@@ -5,21 +5,19 @@ import { registrationStart, registrationSuccess, registrationFailed } from './us
 const registrationSaga = function* (action) {
   try {
     const data = yield call(registrationRequest, action.payload);
-    yield put({ type: registrationSuccess.toString() });
+    yield put(registrationSuccess());
   } catch (e) {
-    yield put({ type: registrationFailed.toString() });
+    yield put(registrationFailed());
   }
 }
 
-const watchRegistrationAsync = function* (getState) {
-  yield takeEvery(registrationStart.toString(), registrationSaga, getState);
+const watchRegistrationAsync = function* () {
+  yield takeEvery(registrationStart, registrationSaga);
 }
 
 
 const root = function* () {
-  yield [
-    registrationSaga,
-  ];
+  yield watchRegistrationAsync();
 };
 
 export default root;

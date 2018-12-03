@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextInput, Button, Anchor } from 'grommet';
+import { connect } from 'react-redux';
+import { TextInput, Button } from 'grommet';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import AuthModal from '../AuthModal/AuthModal';
@@ -8,10 +9,11 @@ import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
 import * as Yup from 'yup'
 import * as routes from '../../constants/routes';
 import FocusOnMount from '../../utils/FocusOnMount';
+import { registrationStart } from '../../store/user';
 
 const SigninForm = ({ handleChange, handleBlur, handleSubmit, errors, touched, values, focusElRef }) => (
   <form onSubmit={handleSubmit}>
-    <AuthFormLabel label="Логин:" error={touched.name && errors.name} reqired >
+    <AuthFormLabel label="Логин:" error={touched.name && errors.name} required >
       <TextInput
         name="name"
         value={values.name}
@@ -20,7 +22,7 @@ const SigninForm = ({ handleChange, handleBlur, handleSubmit, errors, touched, v
         ref={focusElRef}
       />
     </AuthFormLabel>
-    <AuthFormLabel label="Электронная почта:" error={touched.email && errors.email} reqired >
+    <AuthFormLabel label="Электронная почта:" error={touched.email && errors.email} required >
       <TextInput
         name="email"
         value={values.email}
@@ -28,7 +30,7 @@ const SigninForm = ({ handleChange, handleBlur, handleSubmit, errors, touched, v
         onBlur={handleBlur}
       />
     </AuthFormLabel>
-    <AuthFormLabel label="Пароль:" reqired error={touched.password && errors.password} >
+    <AuthFormLabel label="Пароль:" required error={touched.password && errors.password} >
       <TextInput
         name="password"
         type="password"
@@ -37,11 +39,11 @@ const SigninForm = ({ handleChange, handleBlur, handleSubmit, errors, touched, v
         onBlur={handleBlur}
       />
     </AuthFormLabel>
-    <AuthFormLabel label="Повторите пароль:" reqired error={touched.repitedPassword && errors.repitedPassword} >
+    <AuthFormLabel label="Повторите пароль:" required error={touched.repeatedPassword && errors.repeatedPassword} >
       <TextInput
-        name="repitedPassword"
+        name="repeatedPassword"
         type="password"
-        value={values.repitedPassword}
+        value={values.repeatedPassword}
         onChange={handleChange}
         onBlur={handleBlur}
       />
@@ -56,7 +58,7 @@ const SigninForm = ({ handleChange, handleBlur, handleSubmit, errors, touched, v
 const schema = Yup.object().shape({
   name: Yup.string().trim().required('Заполните поле'),
   password: Yup.string().required('Заполните поле'),
-  repitedPassword: Yup.string()
+  repeatedPassword: Yup.string()
     .required('Заполните поле')
     .oneOf([Yup.ref('password')], 'Пароли не совпадают'),
   email: Yup.string()
@@ -67,30 +69,34 @@ const schema = Yup.object().shape({
 const initialValues = {
   name: '',
   password: '',
-  repitedPassword: '',
+  repeatedPassword: '',
   email: '',
-}
-
-const formSubmited = (values) => {
-  console.log(values);
 }
 
 const FocusedForm = FocusOnMount(SigninForm);
 
-const mapStateToProps = () => {};
+const mapStateToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  register: (values) => {
+    const valuesCopy = {...values};
+    delete valuesCopy.repeatedPassword;
 
-const enhance = connect()
+    dispatch(registrationStart(valuesCopy));
+  }
+});
 
-const Signin = () => (
+const enhance = connect(mapStateToProps, mapDispatchToProps);
+
+const Signin = ({ register }) => (
   <AuthModal title="Регистрация">
     <Formik
       component={FocusedForm}
       validationSchema={schema}
       validateOnChange={false}
-      onSubmit={formSubmited}
+      onSubmit={register}
       initialValues={initialValues}
     />
   </AuthModal>
 );
 
-export default Signin;
+export default enhance(Signin);

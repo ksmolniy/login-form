@@ -1,19 +1,25 @@
 import { getCookie } from '../utils/cookie';
 
-const apiUrl = ((process && process.env && process.env.REACT_APP_API_BASE_URL) || '') + ((process && process.env && process.env.REACT_APP_API_VERSION) || '');
+const apiUrl = process.env.REACT_APP_API_BASE_URL + process.env.REACT_APP_API_VERSION;
 
 export default function (url, method = 'GET', body) {
   const token = getCookie('token');
-  const headers = new Headers();
-
+  const headers = {};
   if (token) {
-    headers.append('x-access-token', token);
+    headers['x-access-token'] = token;
   }
 
-  const options = { method, headers };
+  headers['Access-Control-Allow-Origin'] = 'localhost:3564';
+
+  const options = {
+    method,
+    headers,
+    mode: 'cors',
+  };
 
   if (body) {
     options.body = JSON.stringify(body);
+    headers['Content-Type'] = 'application/json';
   }
 
   return fetch(`${apiUrl}/${url}`, options)

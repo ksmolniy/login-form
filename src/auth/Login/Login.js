@@ -11,7 +11,7 @@ import FocusOnMount from '../../utils/FocusOnMount';
 
 const LoginForm = ({handleChange, handleSubmit, handleBlur, touched, errors, values: { name, password }, focusElRef }) => (
   <form onSubmit={handleSubmit}>
-    <AuthFormLabel label="Логин:" error={touched.name && errors.name} reqired >
+    <AuthFormLabel label="Логин:" error={touched.name && errors.name} required >
       <TextInput
         name="name"
         value={name}
@@ -20,7 +20,7 @@ const LoginForm = ({handleChange, handleSubmit, handleBlur, touched, errors, val
         ref={focusElRef}
       />
     </AuthFormLabel>
-    <AuthFormLabel label="Пароль:" reqired error={touched.password && errors.password} >
+    <AuthFormLabel label="Пароль:" required error={touched.password && errors.password} >
       <TextInput
         name="password"
         type="password"
