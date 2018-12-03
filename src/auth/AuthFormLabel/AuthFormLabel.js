@@ -1,16 +1,8 @@
-// @flow
 import * as React from 'react';
 import cn from 'classnames';
 import './AuthFormLabel.scss';
 
-type props = {|
-  label: string,
-  reqired: boolean,
-  children: React.Node,
-  error: string | void,
-|};
-
-const AuthFormLabel = ({ label, reqired, children, error } : props) => (
+const AuthFormLabel = ({ label, reqired, children, error }) => (
   <label className="auth-form-label">
     { label }
     { reqired && <span className="auth-form-label--required">{' *'}</span> }

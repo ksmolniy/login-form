@@ -1,4 +1,3 @@
-// @flow
 import request from './request';
 
-export const getBalance = (): Promise<number> => request('user/balance');
+export const getBalance = () => request('user/balance');

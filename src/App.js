@@ -1,5 +1,4 @@
-// @flow
-import React, { Component, StrictMode } from 'react';
+import React, { StrictMode } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Login from './auth/Login/Login';

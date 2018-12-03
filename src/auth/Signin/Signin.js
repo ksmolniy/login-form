@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { TextInput, Button, Anchor } from 'grommet';
 import { Link } from 'react-router-dom';
@@ -78,6 +77,10 @@ const formSubmited = (values) => {
 
 const FocusedForm = FocusOnMount(SigninForm);
 
+const mapStateToProps = () => {};
+
+const enhance = connect()
+
 const Signin = () => (
   <AuthModal title="Регистрация">
     <Formik
@@ -91,4 +94,3 @@ const Signin = () => (
 );
 
 export default Signin;
-

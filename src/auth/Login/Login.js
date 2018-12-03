@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { TextInput, Button, Anchor } from 'grommet';
 import * as Yup from 'yup';
