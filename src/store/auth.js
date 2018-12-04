@@ -12,7 +12,6 @@ const initialValue = {
   logIn: loadingClear(),
 }
 
-
 export const registrationStart = createAction('registration started');
 export const registrationFailed = createAction('registration failed');
 export const registrationSuccess = createAction('registration success');

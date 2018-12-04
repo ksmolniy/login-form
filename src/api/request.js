@@ -23,5 +23,12 @@ export default function (url, method = 'GET', body) {
   }
 
   return fetch(`${apiUrl}/${url}`, options)
-    .then(res => res.json());
+    .then(res => {
+      const firstNumber = Math.floor(res.status / 100);
+
+      if ([4,5].includes(firstNumber)) {
+        throw res;
+      }
+      return res.json()
+    });
 }

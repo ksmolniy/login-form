@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput, Button, Anchor } from 'grommet';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -8,62 +9,98 @@ import AuthFormLabel from '../AuthFormLabel/AuthFormLabel';
 import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
 import * as routes from '../../../constants/routes';
 import FocusOnMount from '../../../utils/FocusOnMount';
+import { loginStart } from '../../../store/auth';
+import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 
-const LoginForm = ({handleChange, handleSubmit, handleBlur, touched, errors, values: { name, password }, focusElRef }) => (
+const LoginForm = ({
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    touched,
+    errors,
+    values: { name, password },
+    focusElRef,
+    loading,
+    failed,
+    success,
+  }) => (
   <form onSubmit={handleSubmit}>
-    <AuthFormLabel label="Логин:" error={touched.name && errors.name} required >
-      <TextInput
-        name="name"
-        value={name}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        ref={focusElRef}
-      />
-    </AuthFormLabel>
-    <AuthFormLabel label="Пароль:" required error={touched.password && errors.password} >
-      <TextInput
-        name="password"
-        type="password"
-        value={password}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-    </AuthFormLabel>
-    <Link to={routes.FORGET}><Anchor label="Забыли пароль?" /></Link>
-    <AuthFormButtons>
-      <Button label="Войти" onClick={handleSubmit} />
-      <Link to={routes.SIGNIN} ><Button className="auth-form-buttons__button" label="Регистрация" /></Link>
-    </AuthFormButtons>
+    <fieldset disabled={loading}>
+      <AuthFormLabel label="Почта:" error={touched.name && errors.name} required >
+        <TextInput
+          name="email"
+          value={name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          ref={focusElRef}
+        />
+      </AuthFormLabel>
+      <AuthFormLabel label="Пароль:" required error={touched.password && errors.password} >
+        <TextInput
+          name="password"
+          type="password"
+          value={password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+      </AuthFormLabel>
+      {/* <Link to={routes.FORGET}><Anchor label="Забыли пароль?" /></Link> */}
+      <AuthFormButtons>
+      <Button
+            label={
+              <LoadingLabel
+                loading={loading}
+                failed={failed}
+                success={success}
+                title="Войти"
+              />
+            }
+            onClick={handleSubmit}
+            disabled={loading}
+          />
+          {loading
+            ? <Button className="auth-form-buttons__button" label="Регистрация" disabled />
+            : <Link to={routes.SIGNIN} ><Button className="auth-form-buttons__button" label="Регистрация" /></Link>
+          }
+      </AuthFormButtons>
+    </fieldset>
   </form>
 )
 
 const schema = Yup.object().shape({
-  name: Yup.string().trim().required('Заполните поле'),
+  email: Yup.string().trim().required('Заполните поле').email('Введите правильную почту'),
   password: Yup.string().required('Заполните поле'),
 });
 
-const formSubmited = (values) => {
-  console.log(values);
-}
-
 const initialValues = {
-  name: '',
+  email: '',
   password: '',
 }
 
 const FocusedForm = FocusOnMount(LoginForm);
 
-const Login = () => (
+const mapStateToProps = ({ auth: { logIn } }) => ({
+  ...logIn,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (values) => dispatch(loginStart(values)),
+});
+
+const enhance = connect(mapStateToProps, mapDispatchToProps);
+
+const Login = ({ login, ...otherProps }) => (
   <AuthModal title="Вход">
     <Formik
-      component={FocusedForm}
       validationSchema={schema}
       validateOnChange={false}
-      onSubmit={formSubmited}
+      onSubmit={login}
       initialValues={initialValues}
-    />
+    >
+      { props => <FocusedForm {...props} {...otherProps} /> }
+    </Formik>
   </AuthModal>
 );
 
-export default Login;
+export default enhance(Login);
 

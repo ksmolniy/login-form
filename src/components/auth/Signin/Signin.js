@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TextInput, Button } from 'grommet';
-import { StatusGood, StatusCritical } from 'grommet-icons';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import AuthModal from '../AuthModal/AuthModal';
@@ -11,23 +10,7 @@ import * as Yup from 'yup'
 import * as routes from '../../../constants/routes';
 import FocusOnMount from '../../../utils/FocusOnMount';
 import { registrationStart } from '../../../store/auth';
-import Spinner from '../../common/Spinner/Spinner';
-
-const LoadingLabel = React.memo(({ loading, success, failed, title }) => {
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (success) {
-    return <StatusGood color="status-ok" />
-  }
-
-  if (failed) {
-    return <StatusCritical color="status-error" />
-  }
-
-  return title;
-});
+import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 
 const SigninForm = ({
     handleChange,
