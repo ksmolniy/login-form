@@ -11,3 +11,9 @@ a {
 .app {
   background: #F6F6F6;
 }
+
+fieldset {
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}

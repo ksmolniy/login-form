@@ -7,6 +7,7 @@ import { grommet } from 'grommet/themes';
 import store from './store/store';
 import * as routes from './constants/routes';
 import Signin from './components/auth/Signin/Signin';
+import Main from './components/user/Main/Main';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Switch>
               <Route path={routes.LOGIN} component={Login} />
               <Route path={routes.SIGNIN} component={Signin} />
+              <Route path={routes.TASKS} component={Main} />
               <Redirect to={routes.LOGIN} />
             </Switch>
           </BrowserRouter>

@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware  from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import userReducer from './user';
+import authReducer from './auth';
 import balanceReducer from './balance';
 import tasksReducer from './tasks';
 import rootSaga from './sagas';
 
 const reducers = {
-  user: userReducer,
+  auth: authReducer,
   balance: balanceReducer,
   tasks: tasksReducer,
 };

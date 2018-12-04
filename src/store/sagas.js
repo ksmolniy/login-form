@@ -1,6 +1,7 @@
+import { delay } from 'redux-saga';
 import { takeEvery, call, put } from 'redux-saga/effects';
 import { registrationRequest } from '../api/auth'
-import { registrationStart, registrationSuccess, registrationFailed } from './user';
+import { registrationStart, registrationSuccess, registrationFailed, registrationClear } from './auth';
 
 const registrationSaga = function* (action) {
   try {
@@ -9,6 +10,8 @@ const registrationSaga = function* (action) {
   } catch (e) {
     yield put(registrationFailed());
   }
+  yield delay(1000);
+  yield put(registrationClear());
 }
 
 const watchRegistrationAsync = function* () {
