@@ -25,6 +25,8 @@ export const loginClear = createAction('login clear');
 export const logOut = createAction('logout');
 export const logIn = createAction('login');
 
+export const checkToken = createAction('check token');
+
 const reducer = createReducer({
   [registrationStart]: (state) => ({
     ...state,

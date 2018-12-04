@@ -10,6 +10,7 @@ export default function (url, method = 'GET', body) {
   }
 
   headers['Access-Control-Allow-Origin'] = '*';
+  headers['Accept'] = 'application/json, text/plain, */*';
 
   const options = {
     method,

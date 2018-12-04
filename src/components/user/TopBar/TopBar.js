@@ -13,6 +13,7 @@ const TopBar = () => (
     align="center"
     gap="small"
     direction="row"
+    pad="medium"
   >
     <Balance count={0} />
     <Logout />

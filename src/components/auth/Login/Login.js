@@ -11,6 +11,7 @@ import * as routes from '../../../constants/routes';
 import FocusOnMount from '../../../utils/FocusOnMount';
 import { loginStart } from '../../../store/auth';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
+import callOnEnter from '../../../utils/callOnEnter';
 
 const LoginForm = ({
     handleChange,
@@ -42,6 +43,7 @@ const LoginForm = ({
           value={password}
           onChange={handleChange}
           onBlur={handleBlur}
+          onKeyPress={callOnEnter(handleSubmit)}
         />
       </AuthFormLabel>
       {/* <Link to={routes.FORGET}><Anchor label="Забыли пароль?" /></Link> */}

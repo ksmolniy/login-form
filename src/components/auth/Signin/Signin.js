@@ -11,6 +11,7 @@ import * as routes from '../../../constants/routes';
 import FocusOnMount from '../../../utils/FocusOnMount';
 import { registrationStart } from '../../../store/auth';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
+import callOnEnter from '../../../utils/callOnEnter';
 
 const SigninForm = ({
     handleChange,
@@ -59,6 +60,7 @@ const SigninForm = ({
           value={values.repeatedPassword}
           onChange={handleChange}
           onBlur={handleBlur}
+          onKeyPress={callOnEnter(handleSubmit)}
         />
       </AuthFormLabel>
       <AuthFormButtons>
