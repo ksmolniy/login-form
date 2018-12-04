@@ -1,14 +1,21 @@
 import React from 'react';
 import { Box } from 'grommet';
-import { Currency } from 'grommet-icons';
+import Logout from '../../common/Logout/Logout';
+import Balance from '../../common/Balance/Balance';
 import './TopBar.scss';
 
 const TopBar = () => (
   <Box
     className="topbar"
+    background="brand"
     gridArea="topbar"
+    justify="end"
+    align="center"
+    gap="small"
+    direction="row"
   >
-    <Currency />
+    <Balance count={0} />
+    <Logout />
   </Box>
 )
 
