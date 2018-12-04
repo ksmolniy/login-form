@@ -7,9 +7,9 @@ import AuthModal from '../AuthModal/AuthModal';
 import AuthFormLabel from '../AuthFormLabel/AuthFormLabel';
 import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
 import * as Yup from 'yup'
-import * as routes from '../../constants/routes';
-import FocusOnMount from '../../utils/FocusOnMount';
-import { registrationStart } from '../../store/user';
+import * as routes from '../../../constants/routes';
+import FocusOnMount from '../../../utils/FocusOnMount';
+import { registrationStart } from '../../../store/user';
 
 const SigninForm = ({ handleChange, handleBlur, handleSubmit, errors, touched, values, focusElRef }) => (
   <form onSubmit={handleSubmit}>

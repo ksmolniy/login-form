@@ -6,8 +6,8 @@ import { Formik } from 'formik';
 import AuthModal from '../AuthModal/AuthModal';
 import AuthFormLabel from '../AuthFormLabel/AuthFormLabel';
 import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
-import * as routes from '../../constants/routes';
-import FocusOnMount from '../../utils/FocusOnMount';
+import * as routes from '../../../constants/routes';
+import FocusOnMount from '../../../utils/FocusOnMount';
 
 const LoginForm = ({handleChange, handleSubmit, handleBlur, touched, errors, values: { name, password }, focusElRef }) => (
   <form onSubmit={handleSubmit}>

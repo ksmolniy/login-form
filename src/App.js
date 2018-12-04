@@ -1,12 +1,12 @@
 import React, { StrictMode } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Login from './auth/Login/Login';
+import Login from './components/auth/Login/Login';
 import { Grommet } from 'grommet';
 import { grommet } from 'grommet/themes';
 import store from './store/store';
 import * as routes from './constants/routes';
-import Signin from './auth/Signin/Signin';
+import Signin from './components/auth/Signin/Signin';
 
 const App = () => {
   return (

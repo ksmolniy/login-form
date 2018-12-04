@@ -9,7 +9,7 @@ export default function (url, method = 'GET', body) {
     headers['x-access-token'] = token;
   }
 
-  headers['Access-Control-Allow-Origin'] = 'localhost:3564';
+  headers['Access-Control-Allow-Origin'] = '*';
 
   const options = {
     method,
