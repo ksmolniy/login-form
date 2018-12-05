@@ -11,9 +11,15 @@ const registrationSaga = function* ({ payload }) {
     yield put(loginStart({ email: payload.email, password: payload.password }));
   } catch (e) {
     yield put(registrationFailed());
-    yield delay(1000);
+    yield delay(2000);
   }
   yield put(registrationClear());
+}
+
+const loginMessages = {
+  'Authentication failed. Wrong password.': 'Неправильный пароль',
+  'Authentication failed. User not found.': 'Пользователь с данной почтой не найден',
+  undefined: 'Неопознанная ошибка',
 }
 
 const loginSaga = function* ({ payload }) {
@@ -22,8 +28,8 @@ const loginSaga = function* ({ payload }) {
     yield put(loginSuccess());
     yield put(logIn(data.jwt));
   } catch (e) {
-    yield put(loginFailed());
-    yield delay(1000);
+    yield put(loginFailed(loginMessages[e.message]));
+    yield delay(2000);
   }
   yield put(loginClear());
 }

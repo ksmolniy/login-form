@@ -24,12 +24,20 @@ export default function (url, method = 'GET', body) {
   }
 
   return fetch(`${apiUrl}/${url}`, options)
-    .then(res => {
-      const firstNumber = Math.floor(res.status / 100);
+    .then(res => res.text().then(text => ({ status: res.status, text })))
+    .then(({ text, status }) => {
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch (e) {
+        throw { message: 'не удалось распарсить JSON' };
+      }
+      const firstNumber = Math.floor(status / 100);
 
       if ([4,5].includes(firstNumber)) {
-        throw res;
+        throw json;
       }
-      return res.json()
+
+      return json;
     });
 }

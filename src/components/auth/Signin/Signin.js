@@ -12,6 +12,7 @@ import FocusOnMount from '../../../utils/FocusOnMount';
 import { registrationStart } from '../../../store/auth';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 import callOnEnter from '../../../utils/callOnEnter';
+import Toast from '../../common/Toast/Toast';
 
 const SigninForm = ({
     handleChange,
@@ -129,6 +130,7 @@ const Signin = ({ register, ...otherProps }) => (
     >
       { props => <FocusedForm {...props} {...otherProps} /> }
     </Formik>
+    { typeof otherProps.failed === 'string' && <Toast message={otherProps.failed} /> }
   </AuthModal>
 );
 

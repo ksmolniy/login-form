@@ -12,6 +12,7 @@ import FocusOnMount from '../../../utils/FocusOnMount';
 import { loginStart } from '../../../store/auth';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 import callOnEnter from '../../../utils/callOnEnter';
+import Toast from '../../common/Toast/Toast';
 
 const LoginForm = ({
     handleChange,
@@ -19,7 +20,7 @@ const LoginForm = ({
     handleBlur,
     touched,
     errors,
-    values: { name, password },
+    values: { email, password },
     focusElRef,
     loading,
     failed,
@@ -27,10 +28,10 @@ const LoginForm = ({
   }) => (
   <form onSubmit={handleSubmit}>
     <fieldset disabled={loading}>
-      <AuthFormLabel label="Почта:" error={touched.name && errors.name} required >
+      <AuthFormLabel label="Почта:" error={touched.email && errors.email} required >
         <TextInput
           name="email"
-          value={name}
+          value={email}
           onChange={handleChange}
           onBlur={handleBlur}
           ref={focusElRef}
@@ -101,6 +102,7 @@ const Login = ({ login, ...otherProps }) => (
     >
       { props => <FocusedForm {...props} {...otherProps} /> }
     </Formik>
+    { typeof otherProps.failed === 'string' && <Toast message={otherProps.failed} /> }
   </AuthModal>
 );
 

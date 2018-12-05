@@ -2,7 +2,7 @@ import { createAction, createReducer } from 'redux-act';
 import { getToken, deleteCookie, setCookie } from '../utils/cookie';
 
 const loadingStart = () => ({ loading: true, failed: false, success: false });
-const loadingFailed = () => ({ loading: false, failed: true, success: false });
+const loadingFailed = (message = true) => ({ loading: false, failed: message, success: false });
 const loadingSuccess = () => ({ loading: false, failed: false, success: true });
 const loadingClear = () => ({ loading: false, failed: false, success: false });
 
@@ -32,9 +32,9 @@ const reducer = createReducer({
     ...state,
     signIn: loadingStart(),
   }),
-  [registrationFailed]: (state) => ({
+  [registrationFailed]: (state, payload) => ({
     ...state,
-    signIn: loadingFailed(),
+    signIn: loadingFailed(payload),
   }),
   [registrationSuccess]: (state) => ({
     ...state,
@@ -48,9 +48,9 @@ const reducer = createReducer({
     ...state,
     logIn: loadingStart(),
   }),
-  [loginFailed]: (state) => ({
+  [loginFailed]: (state, payload) => ({
     ...state,
-    logIn: loadingFailed(),
+    logIn: loadingFailed(payload),
   }),
   [loginSuccess]: (state) => ({
     ...state,
