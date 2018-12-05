@@ -9,7 +9,7 @@ import AuthFormLabel from '../AuthFormLabel/AuthFormLabel';
 import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
 import * as routes from '../../../constants/routes';
 import FocusOnMount from '../../../utils/FocusOnMount';
-import { loginStart } from '../../../store/auth';
+import { loginStart } from '../../../store/reducers/auth';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 import callOnEnter from '../../../utils/callOnEnter';
 import Toast from '../../common/Toast/Toast';
@@ -28,7 +28,7 @@ const LoginForm = ({
   }) => (
   <form onSubmit={handleSubmit}>
     <fieldset disabled={loading}>
-      <AuthFormLabel label="Почта:" error={touched.email && errors.email} required >
+      <AuthFormLabel label="Почта:" error={ touched.email && errors.email } required >
         <TextInput
           name="email"
           value={email}
@@ -37,7 +37,7 @@ const LoginForm = ({
           ref={focusElRef}
         />
       </AuthFormLabel>
-      <AuthFormLabel label="Пароль:" required error={touched.password && errors.password} >
+      <AuthFormLabel label="Пароль:" required error={ touched.password && errors.password } >
         <TextInput
           name="password"
           type="password"

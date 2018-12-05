@@ -1,5 +1,5 @@
 import { createAction, createReducer } from 'redux-act';
-import { getToken, deleteCookie, setCookie } from '../utils/cookie';
+import { getToken, deleteCookie, setCookie } from '../../utils/cookie';
 
 const loadingStart = () => ({ loading: true, failed: false, success: false });
 const loadingFailed = (message = true) => ({ loading: false, failed: message, success: false });

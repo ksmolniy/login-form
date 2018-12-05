@@ -9,7 +9,7 @@ import AuthFormButtons from '../AuthFormButtons/AuthFormButtons';
 import * as Yup from 'yup'
 import * as routes from '../../../constants/routes';
 import FocusOnMount from '../../../utils/FocusOnMount';
-import { registrationStart } from '../../../store/auth';
+import { registrationStart } from '../../../store/reducers/auth';
 import LoadingLabel from '../../common/LoadingLabel/LoadingLabel';
 import callOnEnter from '../../../utils/callOnEnter';
 import Toast from '../../common/Toast/Toast';

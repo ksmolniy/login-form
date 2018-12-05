@@ -1,8 +1,8 @@
 import { delay } from 'redux-saga';
-import { takeEvery, call, put, all } from 'redux-saga/effects';
-import { registrationRequest, logInRequest, checkTokenRequest } from '../api/auth'
-import { registrationStart, registrationSuccess, registrationFailed, registrationClear, logOut } from './auth';
-import { loginStart, loginSuccess, loginFailed, loginClear, logIn, checkToken } from './auth';
+import { takeEvery, call, put } from 'redux-saga/effects';
+import { registrationRequest, logInRequest, checkTokenRequest } from '../../api/auth'
+import { registrationStart, registrationSuccess, registrationFailed, registrationClear, logOut } from '../reducers/auth';
+import { loginStart, loginSuccess, loginFailed, loginClear, logIn, checkToken } from '../reducers/auth';
 
 const registrationSaga = function* ({ payload }) {
   try {
@@ -28,7 +28,7 @@ const loginSaga = function* ({ payload }) {
     yield put(loginSuccess());
     yield put(logIn(data.jwt));
   } catch (e) {
-    yield put(loginFailed(loginMessages[e.message]));
+    yield put(loginFailed(loginMessages[e.message] || e.message));
     yield delay(2000);
   }
   yield put(loginClear());
@@ -45,24 +45,14 @@ const checkTokenSaga = function* () {
   }
 }
 
-const watchRegistrationAsync = function* () {
+export const watchRegistrationAsync = function* () {
   yield takeEvery(registrationStart, registrationSaga);
 }
 
-const watchLoginAsync = function* () {
+export const watchLoginAsync = function* () {
   yield takeEvery(loginStart, loginSaga);
 }
 
-const watchCheckTokenAsync = function* () {
+export const watchCheckTokenAsync = function* () {
   yield takeEvery(checkToken, checkTokenSaga);
 }
-
-const root = function* () {
-  yield all([
-    watchRegistrationAsync(),
-    watchLoginAsync(),
-    watchCheckTokenAsync(),
-  ]);
-};
-
-export default root;
