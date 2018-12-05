@@ -1,9 +1,8 @@
-export const getCookie = (key) => {
-  const cookiesArr = document.cookie.split(';').map(cookie => cookie.split('='));
-
-  const cookie = cookiesArr.find(([cookieName]) => cookieName === key);
-
-  return cookie && cookie[1];
+export function getCookie(name) {
+  const matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
 export const setCookie = (key, value, hours = 5) => {
