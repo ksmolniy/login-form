@@ -1,13 +1,11 @@
 import React from 'react';
 import { Button } from 'grommet';
-import { Currency } from 'grommet-icons';
 
-const Balance = ({ count }) => (
+const Balance = ({ balance, commentPrice }) => (
   <Button
     className="balance"
     color="brand"
-    label={''+count}
-    icon={<Currency size="2rem" />}
+    label={`${balance}₽ / ${Math.floor(balance/commentPrice)} в коментариях`}
   />
 )
 

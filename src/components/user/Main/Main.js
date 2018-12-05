@@ -2,18 +2,17 @@ import React, { Component } from 'react'
 import { Grid, Box } from 'grommet';
 import { Switch, Route } from 'react-router-dom';
 import * as routes from '../../../constants/routes';
-import Sidebar from '../Sidebar/Sidebar';
 import TopBar from '../TopBar/TopBar';
 import Tasks from '../Tasks/Tasks';
 import TasksCreate from '../TasksCreate/TasksCreate';
 import './Main.scss';
 import { connect } from 'react-redux';
 import { gettingBalanceStart } from '../../../store/reducers/balance';
+import { logOut } from '../../../store/reducers/auth';
 
 const areas = [
-  { name: 'sidebar', start: [0, 1], end: [0, 1] },
   { name: 'topbar', start: [0, 0], end: [1, 0] },
-  { name: 'content', start: [1, 1], end: [1, 1] },
+  { name: 'content', start: [0, 1], end: [1, 1] },
 ];
 
 const columns = ['xsmall', 'flex'];
@@ -27,7 +26,7 @@ class Main extends Component {
   }
 
   render() {
-    const { balance } = this.props;
+    const { balance, commentPrice, logout } = this.props;
 
     return (
       <Grid
@@ -36,8 +35,7 @@ class Main extends Component {
         columns={columns}
         rows={rows}
       >
-        <Sidebar />
-        <TopBar balance={balance} />
+        <TopBar balance={balance} commentPrice={commentPrice} logout={logout} />
         <Box gridArea="content">
           <Switch>
             <Route path={routes.TASKS} exact component={Tasks} />
@@ -49,11 +47,13 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = ({ balance: { count } }) => ({
-  balance: count,
+const mapStateToProps = ({ balance: { balance, comment_price } }) => ({
+  balance,
+  commentPrice: comment_price,
 })
 const mapDispatchToProps = (dispatch) => ({
   getBalance: () => dispatch(gettingBalanceStart()),
+  logout: () => dispatch(logOut()),
 })
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);

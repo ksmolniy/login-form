@@ -5,8 +5,7 @@ import { getBalanceRequest } from '../../api/balance';
 const gettingBalance = function*() {
   try {
     const data = yield call(getBalanceRequest);
-    debugger;
-    yield put(gettingBalanceSuccess(data.count));
+    yield put(gettingBalanceSuccess(data));
   } catch (e) {
     yield put(gettingBalanceFailed());
   }

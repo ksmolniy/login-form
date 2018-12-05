@@ -7,11 +7,12 @@ import Main from '../../components/user/Main/Main';
 import Login from '../../components/auth/Login/Login';
 import { checkToken } from '../../store/reducers/auth';
 
-const ProtectedRoute = ({ path, component: Comp, isAllowed, redirectTo }) =>
+const ProtectedRoute = ({ path, component: Comp, isAllowed, redirectTo }) => (
   <Route
     path={path}
     render={() => (isAllowed ? <Comp /> : <Redirect to={redirectTo} />)}
-  />;
+  />
+);
 
 class GuardedRouter extends Component {
   componentDidMount() {

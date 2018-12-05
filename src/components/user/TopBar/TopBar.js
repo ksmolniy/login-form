@@ -4,7 +4,7 @@ import Logout from '../../common/Logout/Logout';
 import Balance from '../../common/Balance/Balance';
 import './TopBar.scss';
 
-const TopBar = ({ balance }) => (
+const TopBar = ({ balance, commentPrice, logout }) => (
   <Box
     className="topbar"
     background="brand"
@@ -15,8 +15,8 @@ const TopBar = ({ balance }) => (
     direction="row"
     pad="medium"
   >
-    <Balance count={balance} />
-    <Logout />
+    <Balance balance={balance} commentPrice={commentPrice} />
+    <Logout logout={logout} />
   </Box>
 )
 
